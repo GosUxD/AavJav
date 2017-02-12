@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AavJaav</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="intro_text_1">Kiss goodbye to hassles of <b>public</b> transport.</string>
+    <string name="intro_text_2">Save on <b>fuel cost</b> and save pollution.</string>
+    <string name="intro_text_3">It\'s time <b>to start</b> sharing &amp; earning.</string>
+
+</resources>
