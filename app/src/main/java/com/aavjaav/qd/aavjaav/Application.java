@@ -8,7 +8,7 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Lato-Black.ttf")
+                .setDefaultFontPath("fonts/Street.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );

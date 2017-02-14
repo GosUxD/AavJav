@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/transparent"
-    tools:context="com.aavjaav.qd.aavjaav.view.SplashActivity$PlaceholderFragment">
+    tools:context="com.aavjaav.qd.aavjaav.view.activities.SplashActivity$PlaceholderFragment">
 
     <View
         android:layout_width="wrap_content"

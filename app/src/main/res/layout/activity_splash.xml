@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.SplashActivity">
+    tools:context=".view.activities.SplashActivity">
 
 
     <HorizontalScrollView
@@ -47,7 +47,7 @@
         tools:ignore="MissingPrefix" />
 
     <Button
-        android:id="@+id/intro_button_okay"
+        android:id="@+id/intro_button_login"
         fontPath="fonts/Lato-Bold.ttf"
         android:layout_width="match_parent"
         android:textAllCaps="false"
@@ -57,14 +57,14 @@
         android:layout_marginBottom="70dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         tools:ignore="MissingPrefix" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabDots"
-        android:layout_above="@id/intro_button_okay"
+        android:layout_above="@id/intro_button_login"
         android:layout_centerHorizontal="true"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
