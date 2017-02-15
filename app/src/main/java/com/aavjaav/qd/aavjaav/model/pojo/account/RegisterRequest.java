@@ -1,10 +1,13 @@
-
 package com.aavjaav.qd.aavjaav.model.pojo.account;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginRequest {
+/**
+ * Created by Daniel on 2/15/2017.
+ */
+
+public class RegisterRequest {
 
     @SerializedName("email")
     @Expose
@@ -12,11 +15,8 @@ public class LoginRequest {
     @SerializedName("password")
     @Expose
     private String password;
-    @SerializedName("token")
-    @Expose
-    private String token;
 
-    public LoginRequest(String email, String password) {
+    public RegisterRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -35,14 +35,6 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
 }

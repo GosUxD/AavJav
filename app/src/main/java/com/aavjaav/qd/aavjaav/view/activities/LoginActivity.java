@@ -1,5 +1,6 @@
 package com.aavjaav.qd.aavjaav.view.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -37,6 +37,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REQUEST_GOOGLE_SIGN = 50;
+    private static final int REQUEST_REGISTER = 51;
+
     private static final String TAG = "LoginActivity";
     private EditText mEmail;
     private EditText mPassword;
@@ -98,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mPresenter.doRegister();
             }
         });
 
@@ -164,19 +166,23 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+
+    //TODO Change implementation on LoginSuccess
     @Override
     public void onLoginSuccess() {
-
+        Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onLoginFailure() {
-
+    public void onLoginFailure(String errorMsg) {
+        Toast.makeText(this, "Error logging in, please try again.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showRegister() {
-
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivityForResult(intent, REQUEST_REGISTER);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
     @Override
@@ -184,6 +190,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
     }
 
+    //TODO Send information to server when logged with google account.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -192,6 +199,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         if (requestCode == REQUEST_GOOGLE_SIGN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+        }
+
+        if(requestCode == REQUEST_REGISTER) {
+            if(resultCode == Activity.RESULT_OK) {
+                try {
+                    String result = data.getStringExtra(RegisterActivity.EXTRA_SUCCESS);
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.d(TAG, "Error", e);
+                }
+            }
         }
     }
 

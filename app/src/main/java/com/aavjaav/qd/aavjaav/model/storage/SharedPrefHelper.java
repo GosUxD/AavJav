@@ -12,8 +12,15 @@ public class SharedPrefHelper {
 
     public static class Key {
         public static final String IS_FIRST_LAUNCH = "is_app_first_time_started";
+        public static final String FRIST_NAME = "first_name";
+        public static final String LAST_NAME = "last_name";
+        public static final String EMAIL_ADDRESS = "email_address";
+        public static final String MOBILE_NUMBER = "mobile_number";
+        public static final String TOKEN = "login_token";
+        public static final String TOKEN_CREATED = "token_created";
 
     }
+
     private SharedPrefHelper(Context context) {
         mPref = context.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE);
     }
@@ -30,14 +37,7 @@ public class SharedPrefHelper {
         if (sSharedPrefs != null) {
             return sSharedPrefs;
         }
-
-        //Option 1:
         throw new IllegalArgumentException("Should use getInstance(Context) at least once before using this method.");
-
-        //Option 2:
-        // Alternatively, you can create a new instance here
-        // with something like this:
-        // getInstance(MyCustomApplication.getAppContext());
     }
 
     public void put(String key, String val) {
@@ -64,16 +64,6 @@ public class SharedPrefHelper {
         doCommit();
     }
 
-    /**
-     * Convenience method for storing doubles.
-     * <p>
-     * There may be instances where the accuracy of a double is desired.
-     * SharedPreferences does not handle doubles so they have to
-     * cast to and from String.
-     *
-     * @param key The name of the preference to store.
-     * @param val The new value for the preference.
-     */
     public void put(String key, double val) {
         doEdit();
         mEditor.putString(key, String.valueOf(val));
@@ -118,28 +108,10 @@ public class SharedPrefHelper {
         return mPref.getFloat(key, defaultValue);
     }
 
-    /**
-     * Convenience method for retrieving doubles.
-     * <p>
-     * There may be instances where the accuracy of a double is desired.
-     * SharedPreferences does not handle doubles so they have to
-     * cast to and from String.
-     *
-     * @param key The name of the preference to fetch.
-     */
     public double getDouble(String key) {
         return getDouble(key, 0);
     }
 
-    /**
-     * Convenience method for retrieving doubles.
-     * <p>
-     * There may be instances where the accuracy of a double is desired.
-     * SharedPreferences does not handle doubles so they have to
-     * cast to and from String.
-     *
-     * @param key The name of the preference to fetch.
-     */
     public double getDouble(String key, double defaultValue) {
         try {
             return Double.valueOf(mPref.getString(key, String.valueOf(defaultValue)));
@@ -156,11 +128,6 @@ public class SharedPrefHelper {
         return mPref.getBoolean(key, false);
     }
 
-    /**
-     * Remove keys from SharedPreferences.
-     *
-     * @param keys The name of the key(s) to be removed.
-     */
     public void remove(String... keys) {
         doEdit();
         for (String key : keys) {
@@ -169,9 +136,6 @@ public class SharedPrefHelper {
         doCommit();
     }
 
-    /**
-     * Remove all keys from SharedPreferences.
-     */
     public void clear() {
         doEdit();
         mEditor.clear();
@@ -201,4 +165,29 @@ public class SharedPrefHelper {
             mEditor = null;
         }
     }
+
+    private void putFirstName(String name) {
+        put(Key.FRIST_NAME, name);
+    }
+
+    private void putLastName(String lastname) {
+        put(Key.LAST_NAME, lastname);
+    }
+
+    private void putEmail(String email) {
+        put(Key.EMAIL_ADDRESS, email);
+    }
+
+    private void putMobileNumber(String mobileNumbeer) {
+        put(Key.MOBILE_NUMBER, mobileNumbeer);
+    }
+
+    private void  putToken(String token){
+        put(Key.TOKEN, token);
+    }
+
+    private void putTokenCreated(String tokenCreated){
+        put(Key.TOKEN_CREATED, tokenCreated);
+    }
+
 }

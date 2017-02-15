@@ -26,15 +26,19 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
 
     @Override
     public void doLogin(String email, String password) {
-        mRestApiManager.getLoginApi().doLogin(email, password).enqueue(new Callback<LoginResponse>() {
+        mRestApiManager.getLoginApi().doLogin(new LoginRequest(email, password)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if(response.body().getResponse() == null) {
+                if(response.body() == null) {
                     Log.i(TAG, "onResponse: null");
                     return;
                 }
-                LoginResponse.Response loginResponse  = response.body().getResponse().get(0);
-                Log.i(TAG, "onResponse: " + loginResponse.getError());
+
+                if(response.body().isError()) {
+                    mView.onLoginFailure(response.body().getErrorMsg());
+                } else {
+                    mView.onLoginSuccess();
+                }
             }
 
             @Override
@@ -47,7 +51,7 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
 
     @Override
     public void doRegister() {
-
+        mView.showRegister();
     }
 
     @Override

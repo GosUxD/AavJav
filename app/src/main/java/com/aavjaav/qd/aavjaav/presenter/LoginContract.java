@@ -8,7 +8,7 @@ public interface LoginContract {
 
     interface LoginView {
         void onLoginSuccess();
-        void onLoginFailure();
+        void onLoginFailure(String errorMsg);
         void showRegister();
         void showRetreivePass();
     }
