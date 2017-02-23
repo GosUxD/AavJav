@@ -6,6 +6,7 @@ import android.util.Log;
 import com.aavjaav.qd.aavjaav.model.api.RestApiManager;
 import com.aavjaav.qd.aavjaav.model.pojo.account.LoginRequest;
 import com.aavjaav.qd.aavjaav.model.pojo.account.LoginResponse;
+import com.aavjaav.qd.aavjaav.model.storage.SharedPrefHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +38,10 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
                 if(response.body().isError()) {
                     mView.onLoginFailure(response.body().getErrorMsg());
                 } else {
+                    SharedPrefHelper.getInstance(mContext).putFirstName(response.body().getUser().getFname());
+                    SharedPrefHelper.getInstance(mContext).putLastName(response.body().getUser().getLname());
+                    SharedPrefHelper.getInstance(mContext).putEmail(response.body().getUser().getEmail());
+                    SharedPrefHelper.getInstance(mContext).setIsLogged(true);
                     mView.onLoginSuccess();
                 }
             }

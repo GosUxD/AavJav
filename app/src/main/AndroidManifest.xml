@@ -12,10 +12,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
-            android:name=".view.activities.SplashActivity"
+            android:name=".view.activities.LoginActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +28,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.LoginActivity"
+            android:name=".view.activities.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activities.RegisterActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activities.HomeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activities.ChangePasswordActivity"
+            android:parentActivityName=".view.activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.AccountDetailsActivity"
+            android:parentActivityName=".view.activities.HomeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

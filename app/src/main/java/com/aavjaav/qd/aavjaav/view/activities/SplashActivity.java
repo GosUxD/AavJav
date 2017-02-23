@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aavjaav.qd.aavjaav.R;
+import com.aavjaav.qd.aavjaav.model.storage.SharedPrefHelper;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -38,7 +39,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         initUI();
-
     }
 
     private void initUI() {
@@ -47,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.splash_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -79,9 +79,11 @@ public class SplashActivity extends AppCompatActivity {
         mProceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPrefHelper.getInstance(SplashActivity.this).putShouldShowIntro(false);
                 Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
             }
         });
 

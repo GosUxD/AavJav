@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aavjaav.qd.aavjaav.R;
+import com.aavjaav.qd.aavjaav.model.storage.SharedPrefHelper;
 import com.aavjaav.qd.aavjaav.presenter.LoginContract;
 import com.aavjaav.qd.aavjaav.presenter.LoginPresenter;
 import com.facebook.CallbackManager;
@@ -55,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkShouldShowIntro();
+        checkIsLoggedIn();
         setContentView(R.layout.activity_login);
 
         mPresenter = new LoginPresenter(this, LoginActivity.this);
@@ -63,8 +66,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         initFacebook();
         initGooglePlus();
     }
-
-
 
     private void initUI() {
         mEmail = (EditText) findViewById(R.id.login_email);
@@ -76,11 +77,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
             public void onClick(View v) {
                 String email = mEmail.getText().toString();
                 String pass = mPassword.getText().toString();
-                if(TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(email)) {
                     Toast.makeText(LoginActivity.this, "Email is empty..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(pass)) {
+                if (TextUtils.isEmpty(pass)) {
                     Toast.makeText(LoginActivity.this, "Password is empty..", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -170,7 +171,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     //TODO Change implementation on LoginSuccess
     @Override
     public void onLoginSuccess() {
-        Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show();
+        showHomeActivity();
+    }
+
+    private void showHomeActivity() {
+        Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(homeIntent);
+        finish();
     }
 
     @Override
@@ -201,8 +209,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
             handleSignInResult(result);
         }
 
-        if(requestCode == REQUEST_REGISTER) {
-            if(resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_REGISTER) {
+            if (resultCode == Activity.RESULT_OK) {
                 try {
                     String result = data.getStringExtra(RegisterActivity.EXTRA_SUCCESS);
                     Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
@@ -225,5 +233,19 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "GoogleApiConnection failed" + connectionResult.getErrorMessage());
+    }
+
+    private void checkIsLoggedIn() {
+        if (SharedPrefHelper.getInstance(this).getIsLogged()) {
+            showHomeActivity();
+        }
+    }
+
+    private void checkShouldShowIntro() {
+        if (SharedPrefHelper.getInstance(this).getShouldShowIntro()) {
+            Intent showIntro = new Intent(LoginActivity.this, SplashActivity.class);
+            startActivity(showIntro);
+            finish();
+        }
     }
 }

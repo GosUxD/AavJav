@@ -12,6 +12,7 @@ public class SharedPrefHelper {
 
     public static class Key {
         public static final String IS_FIRST_LAUNCH = "is_app_first_time_started";
+        public static final String IS_LOGGED = "is_logged";
         public static final String FRIST_NAME = "first_name";
         public static final String LAST_NAME = "last_name";
         public static final String EMAIL_ADDRESS = "email_address";
@@ -166,28 +167,44 @@ public class SharedPrefHelper {
         }
     }
 
-    private void putFirstName(String name) {
+    public void putShouldShowIntro(Boolean showIntro) {
+        put(Key.IS_FIRST_LAUNCH, showIntro);
+    }
+
+    public boolean getShouldShowIntro() {
+        return getBoolean(Key.IS_FIRST_LAUNCH, true);
+    }
+
+    public void putFirstName(String name) {
         put(Key.FRIST_NAME, name);
     }
 
-    private void putLastName(String lastname) {
+    public void putLastName(String lastname) {
         put(Key.LAST_NAME, lastname);
     }
 
-    private void putEmail(String email) {
+    public void putEmail(String email) {
         put(Key.EMAIL_ADDRESS, email);
     }
 
-    private void putMobileNumber(String mobileNumbeer) {
+    public void putMobileNumber(String mobileNumbeer) {
         put(Key.MOBILE_NUMBER, mobileNumbeer);
     }
 
-    private void  putToken(String token){
+    public void putToken(String token) {
         put(Key.TOKEN, token);
     }
 
-    private void putTokenCreated(String tokenCreated){
+    public void putTokenCreated(String tokenCreated) {
         put(Key.TOKEN_CREATED, tokenCreated);
+    }
+
+    public void setIsLogged(boolean isLogged) {
+        put(Key.IS_LOGGED, isLogged);
+    }
+
+    public boolean getIsLogged() {
+        return getBoolean(Key.IS_LOGGED, false);
     }
 
 }
