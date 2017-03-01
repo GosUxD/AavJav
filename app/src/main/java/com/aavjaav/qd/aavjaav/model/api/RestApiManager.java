@@ -4,7 +4,6 @@ import com.aavjaav.qd.aavjaav.model.utils.Constants;
 import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,11 +13,8 @@ public class RestApiManager {
     RegisterApi mRegisterApi;
 
     public LoginApi getLoginApi() {
-        if(mLoginApi == null) {
+        if (mLoginApi == null) {
             OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            clientBuilder.addInterceptor(loggingInterceptor);
 
             Retrofit client = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
@@ -32,7 +28,7 @@ public class RestApiManager {
     }
 
     public RegisterApi getRegisterApi() {
-        if(mRegisterApi == null) {
+        if (mRegisterApi == null) {
             Retrofit client = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))

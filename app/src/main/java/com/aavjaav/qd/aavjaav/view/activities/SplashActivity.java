@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.aavjaav.qd.aavjaav.R;
 import com.aavjaav.qd.aavjaav.model.storage.SharedPrefHelper;
+import com.andraskindler.parallaxviewpager.ParallaxViewPager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -30,7 +31,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
     private Button mProceedButton;
 
 
@@ -42,38 +42,15 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        final HorizontalScrollView scrollView = (HorizontalScrollView) findViewById(R.id.scroll_view);
-        final ImageView imageView = (ImageView) findViewById(R.id.background);
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.splash_container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        ParallaxViewPager parallaxViewPager = (ParallaxViewPager) findViewById(R.id.parallaxviewpager);
+        parallaxViewPager.setOverlapPercentage(0.5f);
+        parallaxViewPager.setScaleType(ParallaxViewPager.FIT_HEIGHT);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                int x = (int) ((mViewPager.getWidth() * position + positionOffsetPixels) * computeFactor());
-                scrollView.scrollTo(x, 0);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-
-            private float computeFactor() {
-                return (imageView.getWidth() - mViewPager.getWidth()) /
-                        (float)(mViewPager.getWidth() * (mViewPager.getAdapter().getCount() - 1));
-            }
-        });
+        parallaxViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabDots);
-        tabLayout.setupWithViewPager(mViewPager, true);
+        tabLayout.setupWithViewPager(parallaxViewPager, true);
 
         mProceedButton = (Button) findViewById(R.id.intro_button_login);
         mProceedButton.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
 
         public PlaceholderFragment() {
         }
+
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -134,13 +112,13 @@ public class SplashActivity extends AppCompatActivity {
             int introNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (introNumber) {
                 case 1:
-                    mIntroValue =  getResources().getText(R.string.intro_text_1);
+                    mIntroValue = getResources().getText(R.string.intro_text_1);
                     break;
                 case 2:
-                    mIntroValue =  getResources().getText(R.string.intro_text_2);
+                    mIntroValue = getResources().getText(R.string.intro_text_2);
                     break;
                 case 3:
-                    mIntroValue =  getResources().getText(R.string.intro_text_3);
+                    mIntroValue = getResources().getText(R.string.intro_text_3);
                     break;
             }
 

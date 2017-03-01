@@ -115,7 +115,10 @@ public class HomeActivity extends AppCompatActivity
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
 
 //TODO transfer to fragment book a car

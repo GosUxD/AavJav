@@ -11,6 +11,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+
     }
     buildTypes {
         release {
@@ -27,16 +29,14 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
-    compile 'com.xgc1986.android:parallaxpagertransformer:1.0.4'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.google.android.gms:play-services:10.0.1'
+    compile 'com.google.android.gms:play-services-places:10.2.0'
+    compile 'com.google.android.gms:play-services-auth:10.2.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-
+    compile 'com.andraskindler.parallaxviewpager:parallaxviewpager:0.3.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

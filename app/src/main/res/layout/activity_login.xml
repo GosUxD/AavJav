@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_bg"
     android:gravity="center"
     android:orientation="vertical"
@@ -171,14 +172,14 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginRight="8dp"
-            android:src="@drawable/ic_facebook" />
+            app:srcCompat="@drawable/ic_facebook" />
 
         <ImageView
             android:id="@+id/login_google"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginLeft="8dp"
-            android:src="@drawable/ic_google" />
+            app:srcCompat="@drawable/ic_google" />
 
 
     </LinearLayout>
