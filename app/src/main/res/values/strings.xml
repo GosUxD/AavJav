@@ -38,6 +38,11 @@ In vel dui vitae massa tristique malesuada. Morbi tincidunt odio metus, in molli
     <string name="activity_change_password_current">Enter current password</string>
     <string name="activity_change_password_new">Enter new password</string>
     <string name="activity_change_password_confirm">Confirm new password</string>
+    <string name="fragment_feedback_found_a_bug">Found a bug?</string>
+    <string name="fragment_feedback_describe_the_steps_so_we_can_recreate_the_bug">Describe the steps so we can recreate the bug.</string>
+    <string name="fragment_feedback_enter_your_message">Enter your message.</string>
+    <string name="fragment_feedback_leave_us_a_message">Leave us a message</string>
+    <string name="fragment_feedback_rate_us">Rate us</string>
 
     <string-array name="titles">
         <item>Mr</item>

@@ -19,6 +19,7 @@ import com.aavjaav.qd.aavjaav.R;
 import com.aavjaav.qd.aavjaav.view.fragments.AboutUsFragment;
 import com.aavjaav.qd.aavjaav.view.fragments.BookCarFragment;
 import com.aavjaav.qd.aavjaav.view.fragments.ContactUsFragment;
+import com.aavjaav.qd.aavjaav.view.fragments.FeedbackFragment;
 import com.aavjaav.qd.aavjaav.view.fragments.MyAccountFragment;
 import com.aavjaav.qd.aavjaav.view.fragments.MyBookingsFragment;
 
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_book_car:
                 fragmentClass = BookCarFragment.class;
                 break;
@@ -84,6 +85,9 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_account:
                 fragmentClass = MyAccountFragment.class;
+                break;
+            case R.id.nav_feedback:
+                fragmentClass = FeedbackFragment.class;
                 break;
             default:
                 fragmentClass = BookCarFragment.class;
