@@ -19,8 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aavjaav.qd.aavjaav.R;
+import com.aavjaav.qd.aavjaav.model.storage.SharedPrefHelper;
+import com.aavjaav.qd.aavjaav.presenter.BookingsContract;
+import com.aavjaav.qd.aavjaav.presenter.BookingsPresenter;
+import com.aavjaav.qd.aavjaav.view.fragments.MyBookingsFragmentTabs.CurrentBookings;
+import com.aavjaav.qd.aavjaav.view.fragments.MyBookingsFragmentTabs.PreviousBookings;
 
 public class MyBookingsFragment extends Fragment {
 
@@ -54,42 +60,13 @@ public class MyBookingsFragment extends Fragment {
         return root;
     }
 
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_current_booking, container, false);
-
-            return rootView;
-        }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
+
     //TODO Make new fragment class for each tab
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -98,14 +75,18 @@ public class MyBookingsFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return CurrentBookings.newInstance();
+                case 1:
+                    return PreviousBookings.newInstance();
+                default:
+                    return CurrentBookings.newInstance();
+            }
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 

@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/fragment_book_car_search"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="2dp"
         android:background="@color/colorAccent"
@@ -167,7 +167,6 @@
                                 android:id="@+id/fragment_book_car_start_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10:00 "
                                 android:textColor="@color/colorTextPrimaryDark" />
 
 
@@ -259,7 +258,6 @@
                                 android:id="@+id/fragment_book_car_end_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10:00 "
                                 android:textColor="@color/colorTextPrimaryDark" />
 
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,13 @@ import android.widget.Toast;
 
 import com.aavjaav.qd.aavjaav.R;
 import com.aavjaav.qd.aavjaav.model.utils.DateUtils;
+import com.aavjaav.qd.aavjaav.view.activities.CarsResultActivity;
 import com.aavjaav.qd.aavjaav.view.fragments.DialogFragments.DatePickerFragment;
 import com.aavjaav.qd.aavjaav.view.fragments.DialogFragments.TimePickerFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
@@ -53,6 +56,8 @@ public class BookCarFragment extends Fragment {
     private TextView mEndTime;
 
     private EditText mPickLocationEdit;
+
+    private TextView mSearch;
 
     private long startMinimumDate;
     private long endMinimumDate;
@@ -99,9 +104,16 @@ public class BookCarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                            .build();
+
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                                    .setFilter(typeFilter)
                                     .build(getActivity());
+
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                     // TODO: Handle the error.
@@ -134,6 +146,25 @@ public class BookCarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showTimePicker(endTimeListener);
+            }
+        });
+
+        mSearch = (TextView) root.findViewById(R.id.fragment_book_car_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(mPickLocationEdit.getText().toString())) {
+                    Toast.makeText(getContext(), "Please pick a location..", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(mStartTime.getText().toString()) || TextUtils.isEmpty(mEndTime.getText().toString())) {
+                    Toast.makeText(getContext(), "Please pick a valid time..", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent carResults = new Intent(getContext(), CarsResultActivity.class);
+                carResults.putExtra(CarsResultActivity.EXTRA_CITY, mPickLocationEdit.getText().toString());
+                startActivity(carResults);
+
             }
         });
 

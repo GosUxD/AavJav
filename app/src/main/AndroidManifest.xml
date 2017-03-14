@@ -50,6 +50,17 @@
             android:name=".view.activities.AccountDetailsActivity"
             android:parentActivityName=".view.activities.HomeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
+            android:label="Add Payment Method"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activities.CarsResultActivity"
+            android:parentActivityName=".view.activities.HomeActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

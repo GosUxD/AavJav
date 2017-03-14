@@ -22,6 +22,11 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -37,6 +42,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.2.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.andraskindler.parallaxviewpager:parallaxviewpager:0.3.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.sharish:CreditCardView:v1.0.4'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -43,6 +43,10 @@ In vel dui vitae massa tristique malesuada. Morbi tincidunt odio metus, in molli
     <string name="fragment_feedback_enter_your_message">Enter your message.</string>
     <string name="fragment_feedback_leave_us_a_message">Leave us a message</string>
     <string name="fragment_feedback_rate_us">Rate us</string>
+    <string name="account_details_sign_out">Sign out</string>
+    <string name="fragment_feedback_send">Send</string>
+    <string name="activity_cars_result_sort_by">Sort by</string>
+    <string name="activity_cars_result_filter">Filter</string>
 
     <string-array name="titles">
         <item>Mr</item>

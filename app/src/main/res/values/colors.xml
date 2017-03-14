@@ -16,5 +16,8 @@
 
     <color name="orangeDark">#F57C00</color>
 
+    <color name="background">#FAFAFA</color>
+
+
 
 </resources>

@@ -13,12 +13,14 @@ public class SharedPrefHelper {
     public static class Key {
         public static final String IS_FIRST_LAUNCH = "is_app_first_time_started";
         public static final String IS_LOGGED = "is_logged";
-        public static final String FRIST_NAME = "first_name";
+        public static final String FIRST_NAME = "first_name";
         public static final String LAST_NAME = "last_name";
         public static final String EMAIL_ADDRESS = "email_address";
         public static final String MOBILE_NUMBER = "mobile_number";
         public static final String TOKEN = "login_token";
         public static final String TOKEN_CREATED = "token_created";
+        public static final String USER_ID = "user_id";
+
 
     }
 
@@ -176,7 +178,7 @@ public class SharedPrefHelper {
     }
 
     public void putFirstName(String name) {
-        put(Key.FRIST_NAME, name);
+        put(Key.FIRST_NAME, name);
     }
 
     public void putLastName(String lastname) {
@@ -185,6 +187,14 @@ public class SharedPrefHelper {
 
     public void putEmail(String email) {
         put(Key.EMAIL_ADDRESS, email);
+    }
+
+    public void putUserId(int uid) {
+        put(Key.USER_ID, uid);
+    }
+
+    public int getUserId() {
+        return getInt(Key.USER_ID);
     }
 
     public void putMobileNumber(String mobileNumbeer) {

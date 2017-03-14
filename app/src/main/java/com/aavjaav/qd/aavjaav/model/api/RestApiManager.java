@@ -1,6 +1,8 @@
 package com.aavjaav.qd.aavjaav.model.api;
 
+import com.aavjaav.qd.aavjaav.model.pojo.feedback.FeedbackRequest;
 import com.aavjaav.qd.aavjaav.model.utils.Constants;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
@@ -9,8 +11,49 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApiManager {
 
-    LoginApi mLoginApi;
-    RegisterApi mRegisterApi;
+    private BookingsApi mBookingsApi;
+    private LoginApi mLoginApi;
+    private RegisterApi mRegisterApi;
+    private FeedbackApi mFeedbackApi;
+    private SearchCarApi mSearchCarApi;
+
+    public BookingsApi getBookingsApi() {
+        if (mBookingsApi == null) {
+            Retrofit client = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
+                    .build();
+
+            mBookingsApi = client.create(BookingsApi.class);
+        }
+
+        return mBookingsApi;
+    }
+
+    public SearchCarApi getSearchCarApi() {
+        if (mSearchCarApi == null) {
+            Retrofit client = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
+                    .build();
+
+            mSearchCarApi = client.create(SearchCarApi.class);
+        }
+
+        return mSearchCarApi;
+    }
+
+    public FeedbackApi getFeedbackApi() {
+        if (mFeedbackApi == null) {
+            Retrofit client = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
+                    .build();
+
+            mFeedbackApi = client.create(FeedbackApi.class);
+        }
+        return mFeedbackApi;
+    }
 
     public LoginApi getLoginApi() {
         if (mLoginApi == null) {

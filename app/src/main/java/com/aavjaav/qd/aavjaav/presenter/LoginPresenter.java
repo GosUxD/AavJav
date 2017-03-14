@@ -41,6 +41,7 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
                     SharedPrefHelper.getInstance(mContext).putFirstName(response.body().getUser().getFname());
                     SharedPrefHelper.getInstance(mContext).putLastName(response.body().getUser().getLname());
                     SharedPrefHelper.getInstance(mContext).putEmail(response.body().getUser().getEmail());
+                    SharedPrefHelper.getInstance(mContext).putUserId(response.body().getUid());
                     SharedPrefHelper.getInstance(mContext).setIsLogged(true);
                     mView.onLoginSuccess();
                 }
