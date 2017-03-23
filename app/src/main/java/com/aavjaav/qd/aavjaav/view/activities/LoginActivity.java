@@ -1,8 +1,11 @@
 package com.aavjaav.qd.aavjaav.view.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,6 +56,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
 
+    private ProgressDialog mProgress;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +74,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     }
 
     private void initUI() {
+        mProgress = new ProgressDialog(LoginActivity.this);
+        mProgress.setCancelable(false);
+
         mEmail = (EditText) findViewById(R.id.login_email);
         mPassword = (EditText) findViewById(R.id.login_passowrd);
 
@@ -85,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
                     Toast.makeText(LoginActivity.this, "Password is empty..", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                mProgress.show();
                 mPresenter.doLogin(email, pass);
             }
         });
@@ -173,6 +183,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     public void onLoginSuccess() {
         //Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show();
         showHomeActivity();
+        mProgress.dismiss();
     }
 
     private void showHomeActivity() {
@@ -184,6 +195,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     public void onLoginFailure(String errorMsg) {
         Toast.makeText(this, "Error logging in, please try again.", Toast.LENGTH_SHORT).show();
+        mProgress.dismiss();
+
     }
 
     @Override

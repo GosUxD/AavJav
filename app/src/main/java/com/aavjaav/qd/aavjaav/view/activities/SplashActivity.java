@@ -1,7 +1,10 @@
 package com.aavjaav.qd.aavjaav.view.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -32,6 +35,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private Button mProceedButton;
+    private ProgressDialog pDialog;
 
 
     @Override
@@ -42,6 +46,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        pDialog = new ProgressDialog(SplashActivity.this);
+        pDialog.setCancelable(false);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         ParallaxViewPager parallaxViewPager = (ParallaxViewPager) findViewById(R.id.parallaxviewpager);
@@ -56,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
         mProceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showProgress();
                 SharedPrefHelper.getInstance(SplashActivity.this).putShouldShowIntro(false);
                 Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
@@ -64,6 +71,16 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showProgress() {
+        pDialog.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        pDialog.dismiss();
     }
 
     @Override

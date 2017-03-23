@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp"
+        android:layout_alignParentStart="true"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="Search"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,21 +47,28 @@
                 android:textColor="@color/colorTextPrimaryDark" />
 
 
-            <EditText
-                android:id="@+id/fragment_book_car_pick_location"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/button_black_stroke"
-                android:clickable="true"
-                android:drawableStart="@drawable/places_ic_search"
-                android:ellipsize="end"
-                android:enabled="true"
-                android:focusable="false"
-                android:hint="@string/book_car_pick_up_location"
-                android:maxLines="1"
-                android:paddingLeft="16dp"
-                android:textColorHint="@color/colorTextHintDark"
-                android:textSize="15sp" />
+                android:background="@drawable/button_black_stroke">
+
+                <EditText
+                    android:id="@+id/fragment_book_car_pick_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/places_ic_search"
+                    android:ellipsize="end"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:hint="@string/book_car_pick_up_location"
+                    android:maxLines="1"
+                    android:paddingLeft="16dp"
+                    android:textColorHint="@color/colorTextHintDark"
+                    android:textSize="15sp" />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,6 +175,7 @@
                                 android:id="@+id/fragment_book_car_start_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="10:00"
                                 android:textColor="@color/colorTextPrimaryDark" />
 
 
@@ -258,6 +267,7 @@
                                 android:id="@+id/fragment_book_car_end_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="10:00"
                                 android:textColor="@color/colorTextPrimaryDark" />
 
 
@@ -296,6 +306,7 @@
         </LinearLayout>
 
     </ScrollView>
+
     <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
